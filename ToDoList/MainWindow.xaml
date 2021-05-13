@@ -1,0 +1,51 @@
+﻿<Window x:Class="ToDoList.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToDoList"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="Cornsilk">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="3" Margin="0,0,-0.4,214" Grid.RowSpan="2">
+            <TextBlock Text="To Do List" FontSize="25" HorizontalAlignment="Center" Padding="3"></TextBlock>
+        </StackPanel>
+        <StackPanel  Grid.Row="1" Grid.ColumnSpan="2" Margin="0,12.6,264.6,-1">
+            <ToggleButton x:Name="ToggleButton1" Checked="ToggleButton_Checked" Height="21" Margin="0,0,-0.2,0" >
+                <ToggleButton.Style>
+                    <Style TargetType="{x:Type ToggleButton}">
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Content" Value="Show a list of tasks"></Setter>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Content" Value="Hide a list of tasks"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
+            <Popup x:Name="Popup1" IsOpen="{Binding ElementName=ToggleButton1, Path=IsChecked}" PlacementTarget="{Binding ElementName=ToggleButton1}">
+                <StackPanel x:Name="stackpanel1">
+                    <ToggleButton x:Name="ToggleButton2" Content="Add Task" Padding="4" Click="Button_Click"></ToggleButton>
+                </StackPanel>
+            </Popup>
+            <Popup x:Name="Popup2" IsOpen="{Binding ElementName=ToggleButton1, Path=IsChecked}" PlacementTarget="{Binding ElementName=ToggleButton2}" Placement="Right" HorizontalOffset="120">
+                <TextBox x:Name="textbox1" Width="60" Text="nazwa pliku"></TextBox>
+
+            </Popup>
+        </StackPanel>
+        <Button Content="Done Tasks" Grid.Column="2" Click="Button_Click_1" Margin="0.4,12.6,-0.4,344" Grid.Row="1"/>
+        <Button Content="transfer" Grid.Column="1" Grid.ColumnSpan="2" Margin="0.2,12.6,263.6,344" Grid.Row="1" Click="Button_Click_2"/>
+
+    </Grid>
+</Window>
